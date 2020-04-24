@@ -1,0 +1,17 @@
+spawn telnet [lindex $argv 0]
+
+expect "*sername:"
+send "usernamehere\r"
+expect "*assword:"
+send "passwordhere\r"
+expect "*#"
+send "write memory\r\r"
+expect "*#"
+send "terminal length 0\r"
+expect "*#"
+send "show startup-config\r"
+
+expect {
+	timeout { send " exit\r"; exp_continue}
+}
+
